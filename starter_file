@@ -1,0 +1,60 @@
+def process(l):
+    user_input = []
+    user_input = list(l.split())
+    if user_input[0]=='add':
+        process_add(user_input)
+    #
+    elif user_input[0]=='sub':
+        process_sub(user_input)
+    #
+    elif user_input[0]=='mov':
+        process_mov(user_input)
+    #
+    elif user_input[0]=='ld':
+        process_ld(user_input)
+    #
+    elif user_input[0]=='st':
+        process_st(user_input)
+    #
+    elif user_input[0]=='mul':
+        process_mul(user_input)
+    #    
+    elif user_input[0]=='div':
+        process_div(user_input)
+    #
+    elif user_input[0]=='rs':
+        process_rs(user_input)
+    #
+    elif user_input[0]=='ls':
+        process_ls(user_input)
+    #
+    elif user_input[0]=='xor':
+        process_xor(user_input)
+    #
+    elif user_input[0]=='or':
+        process_or(user_input)
+    #
+    elif user_input[0]=='and':
+        process_and(user_input)
+    #
+    elif user_input[0]=='not':
+        process_not(user_input)
+    #
+    elif user_input[0]=='cmp':
+        process_cmp(user_input)
+    #
+    elif user_input[0]=='jmp':
+        process_jmp(user_input)
+    #
+    elif user_input[0]=='jlt':
+        process_jlt(user_input)
+
+while(True):
+    line = input()
+    if len(line)==0:
+        continue
+    elif line=='hlt':
+        process(line)
+        break
+    else:
+        process(line)
