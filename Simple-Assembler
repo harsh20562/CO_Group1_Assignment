@@ -1,1 +1,105 @@
-Which language to do ?
+def TypeB(array):
+    n = 0
+    ans = '-1'
+    # mov
+    if ("mov" in array):
+        for i in array:
+            if (i == "mov"):
+                break
+            n += 1  # increment n
+        ans = "00010"
+
+        if (n + 1 < len(array) and n + 2 < len(array)):
+            for i in registers.keys():
+                if (i == array[n + 1]):
+                    ans += registers[i]
+            if (len(ans) != 8):
+                print("Syntax Error")
+                return "-1"
+            check = array[n + 2]
+            immediate = list(array[n + 2])
+            if (immediate[0] == '$'):
+                imm_number = int(check[1:])
+                if (imm_number <= 255 and imm_number >= 0):
+                    # reg=imm_number
+                    answer = binary(imm_number)
+                    ans += answer
+                else:
+                    print("Illegal immediate value")
+                    return "-1"
+            else:
+                print('Typo error at line number')
+            if (len(ans) != 16):
+                print("Syntax Error")
+                return "-1"
+        else:
+            print("General Syntax Error at line number") # needs to be written
+            return "-1"
+        return ans
+
+    elif("rs" in array):
+        # rightshift
+        for i in array:
+            if (i == "rs"):
+                break
+            n += 1  # increment n otherwise
+        ans = "01000"
+
+        if (n + 1 < len(array) and n + 2 < len(array)):
+            for i in registers.keys():
+                if (i == array[n + 1]):
+                    ans += registers[i]
+            if (len(ans) != 8):
+                print("Typo Error")
+                return "-1"
+            check = array[n + 2]
+            immediate = list(array[n + 2])
+            if (immediate[0] == '$'):
+                imm_number = int(check[1:])
+                if (imm_number <= 255 and imm_number >= 0):
+                    # reg=imm_number*(2^imm_number)
+                    answer = binary(imm_number)
+                    ans += answer
+                else:
+                    print("Illegal immediate value") 
+                    return "-1"
+            if (len(ans) != 16):
+                print("Typo Error")
+                return "-1"
+        else:
+            print("Syntax Error at line number ")
+            return "-1"
+        return ans
+    elif("ls" in array):
+        # leftshift
+        for i in array:
+            if (i == "ls"):
+                break
+            n += 1  
+        ans = "01001"
+
+        if (n + 1 < len(array) and n + 2 < len(array)):
+            for i in registers.keys():
+                if (i == array[n + 1]):
+                    ans += registers[i]
+            if (len(ans) != 8):
+                print("Typo Error")
+                return "-1"
+            check = array[n + 2]
+            immediate = list(array[n + 2])
+            if (immediate[0] == '$'):
+                imm_number = int(check[1:])
+                if (imm_number <= 255 and imm_number >= 0):
+                    answer = binary(imm_number)
+                    ans += answer
+                else:
+                    print("Illegal immediate value")
+                    return "-1"
+            if (len(ans) != 16):
+                print("Typo Error")
+                return "-1"
+        else:
+            print("Syntax Error ")
+            return "-1"
+        return ans
+    return ans
