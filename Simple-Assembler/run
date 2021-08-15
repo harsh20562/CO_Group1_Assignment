@@ -1,0 +1,5 @@
+#!/bin/bash
+#!/bin/bash
+python3 src/main.py $@
+# Add command to run your program here
+
