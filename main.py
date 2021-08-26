@@ -563,8 +563,6 @@ while(True):
             empty = empty + 1
     except EOFError:
         break
-    if line=='-1':
-        break
 total_instructions = len(instructions) #starting from 0 to key - 1
 startaddress = total_instructions - len(var) - empty
 key = key - 1
