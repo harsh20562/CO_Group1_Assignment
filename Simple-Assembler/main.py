@@ -14,7 +14,6 @@ def isalpha(arr):
 
     return True
 
-
 def var_type(list1,startaddress):
     idx = list1.index('var')
     c = 1
@@ -33,8 +32,7 @@ def var_type(list1,startaddress):
         variable[list1[idx+1]] = binary(int(startaddress))
         return 'True'
 
-# @SOURAV
-def TypeA(array, line_no):
+def TypeA(array):
 
     n = 0
     #add
@@ -42,7 +40,7 @@ def TypeA(array, line_no):
         for i in array:
             if(i == "add"):
                 break
-            n += 1  # increment n otherwise 
+            n += 1  
         ans = "0000000"
 
         if(n+1 < len(array) and n+2 < len(array) and n+3 <len(array)): # =checking further indices of n
@@ -51,21 +49,20 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if(len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if(i == array[n+2]):
                     ans += registers[i]
             if (len(ans) != 13):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if(i == array[n+3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 #print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error at", line_no) 
             return "-1"
         return ans
     #sub
@@ -81,21 +78,20 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if (len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 2]):
                     ans += registers[i]
             if (len(ans) != 13):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error at line ")
             return "-1"
         return ans
     #mul
@@ -111,21 +107,20 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if (len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 2]):
                     ans += registers[i]
             if (len(ans) != 13):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error")
             return "-1"
         return ans
     #xor
@@ -141,21 +136,20 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if (len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 2]):
                     ans += registers[i]
             if (len(ans) != 13):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error")
             return "-1"
         return ans
     #or
@@ -171,21 +165,20 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if (len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 2]):
                     ans += registers[i]
             if (len(ans) != 13):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error")
             return "-1"
         return ans
     #and
@@ -201,20 +194,19 @@ def TypeA(array, line_no):
                     ans += registers[i]
             if (len(ans) != 10):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 2]):
                     ans += registers[i]
             if (len(ans) != 13):
-                return "-1"
+                return "-2"
             for i in registers.keys():
                 if (i == array[n + 3]):
                     ans += registers[i]
             if (len(ans) != 16):
                 # print("Typo Error")
-                return "-1"
+                return "-2"
         else:
-            print("Semantics Error")
             return "-1"
         return ans
     else :
@@ -226,18 +218,11 @@ def TypeD(list1):
         idx = list1.index('ld')
         if idx + 2 == len(list1) - 1:
             if list1[idx+1] not in registers:
-                return 'False'
+                return '-1'
             else:
                 address = check1(list1[idx+2])
                 if address=='False':
-                    address2 = check2(list1[idx+2])
-                    if address2 =='False':
-                        return 'False'
-                    else:
-                        ans = '00100'
-                        ans = ans + registers[list1[idx+1]]
-                        ans = ans + str(binary(address2))
-                        return ans
+                    return '-2'
                 else:
                     ans = '00100'
                     ans = ans + registers[list1[idx+1]]
@@ -249,18 +234,11 @@ def TypeD(list1):
         idx = list1.index('st')
         if idx + 2 == len(list1) - 1:
             if list1[idx+1] not in registers:
-                return 'False'
+                return '-1'
             else:
                 address = check1(list1[idx+2])
                 if address=='False':
-                    address2 = check2(list1[idx+2])
-                    if address2=='False':
-                        return 'False'
-                    else:
-                        ans = '00101'
-                        ans = ans + registers[list1[idx+1]]
-                        ans = ans + str(binary(int(address2)))
-                        return ans
+                    return '-2'
                 else:
                     ans = '00101'
                     ans = ans + registers[list1[idx+1]]
@@ -268,8 +246,6 @@ def TypeD(list1):
                     return ans
         else:
             return 'False'
-    else:
-        return 'False'
 
 def check1(s):
     n1 = str(s)
@@ -278,20 +254,6 @@ def check1(s):
             return str(variable[k])
     return 'False'
 
-def check2(s):
-    n1 = str(s)
-    n1 = n1 + ':'
-    for k in instructions.keys():
-        lst1 = []
-        lst1 = instructions[k].split()
-        #print(lst1)
-        if n1 == lst1[0]:
-            #print(k-len(var))
-            return str(k-len(var))
-    return 'False'
-
-
-# @sourav
 def TypeE(array, Label_Dict, line_no):
     n = 0
     ans = ""
@@ -318,7 +280,7 @@ def TypeE(array, Label_Dict, line_no):
                 print("use of undefined label at ")
                 return '-1'
         else:
-            print("Sementics error at ")
+            print("semantics error at ")
             return '-1'
 
     elif('jlt' in array):
@@ -335,7 +297,7 @@ def TypeE(array, Label_Dict, line_no):
                 print("use of undefined label at ")
                 return '-1'
         else:
-            print("Sementics error at ")
+            print("semantics error at ")
             return '-1'
     elif ('jgt' in array):
         for i in array:
@@ -351,7 +313,7 @@ def TypeE(array, Label_Dict, line_no):
                 print("use of undefined label at ")
                 return '-1'
         else:
-            print("Sementics error at ")
+            print("semantics error at ")
             return '-1'
     elif ('je' in array):
         for i in array:
@@ -367,22 +329,22 @@ def TypeE(array, Label_Dict, line_no):
                 print("use of undefined label at ")
                 return '-1'
         else:
-            print("Sementics error at ")
+            print("semantics error at ")
             return '-1'
     else :
-        print("Sementics Error at ")
+        print("semantics Error at ")
         return '-1'
     return ans
  
 
-# @sourav
 def TypeF(array):
     ans = "10011"
 
     if len(array) == 2:
         if array[0][-1] == ":" and  isalpha(array[0][:-1]) and array[1] == "hlt":
             return ans+ "0"*11
-
+        else:
+            return '-1'
     elif(len(array)==1 and array[0] == "hlt"):
         return ans+ "0"*11
 
@@ -397,16 +359,15 @@ def TypeB(array):
         for i in array:
             if (i == "mov"):
                 break
-            n += 1  # increment n
+            n += 1  
         ans = "00010"
-
         if (n + 1 < len(array) and n + 2 < len(array)):
             for i in registers.keys():
                 if (i == array[n + 1]):
                     ans += registers[i]
             if (len(ans) != 8):
-                print("Syntax Error")
-                return "-1"
+                # print("Syntax Error")
+                return '-1'
             check = array[n + 2]
             immediate = list(array[n + 2])
             if (immediate[0] == '$'):
@@ -416,16 +377,16 @@ def TypeB(array):
                     answer = binary(imm_number)
                     ans += answer
                 else:
-                    print("Illegal immediate value")
-                    return "-1"
+                    # print("Illegal immediate value")
+                    return '-2'
             else:
-                print('Typo error at line number')
+                return '-1'
             if (len(ans) != 16):
-                print("Syntax Error")
-                return "-1"
+                # print("Syntax Error")
+                return '-3'
         else:
-            print("General Syntax Error at line number") # needs to be written
-            return "-1"
+            # print("General Syntax Error at line number") # needs to be written
+            return '-3'
         return ans
 
     elif("rs" in array):
@@ -441,8 +402,8 @@ def TypeB(array):
                 if (i == array[n + 1]):
                     ans += registers[i]
             if (len(ans) != 8):
-                print("Typo Error")
-                return "-1"
+                # print("Typo Error")
+                return '-1'
             check = array[n + 2]
             immediate = list(array[n + 2])
             if (immediate[0] == '$'):
@@ -452,14 +413,14 @@ def TypeB(array):
                     answer = binary(imm_number)
                     ans += answer
                 else:
-                    print("Illegal immediate value") 
-                    return "-1"
+                    # print("Illegal immediate value")
+                    return '-2'
             if (len(ans) != 16):
-                print("Typo Error")
-                return "-1"
+                # print("Typo Error")
+                return '-3'
         else:
-            print("Syntax Error at line number ")
-            return "-1"
+            # print("Syntax Error at line number ")
+            return '-1'
         return ans
     elif("ls" in array):
         # leftshift
@@ -474,8 +435,8 @@ def TypeB(array):
                 if (i == array[n + 1]):
                     ans += registers[i]
             if (len(ans) != 8):
-                print("Typo Error")
-                return "-1"
+                # print("Typo Error")
+                return '-1'
             check = array[n + 2]
             immediate = list(array[n + 2])
             if (immediate[0] == '$'):
@@ -484,14 +445,14 @@ def TypeB(array):
                     answer = binary(imm_number)
                     ans += answer
                 else:
-                    print("Illegal immediate value")
-                    return "-1"
+                    # print("Illegal immediate value")
+                    return '-2'
             if (len(ans) != 16):
-                print("Typo Error")
-                return "-1"
+                # print("Typo Error")
+                return '-3'
         else:
-            print("Syntax Error ")
-            return "-1"
+            # print("Syntax Error ")
+            return '-1'
         return ans
     return ans
 
@@ -503,7 +464,7 @@ def TypeC(list1):
         index = list1.index('mov')
         if index + 2 == len(list1) - 1:
             if list1[index+1] not in registers or list1[index+2] not in registers:
-                return 'False'
+                return '-1'
             else:
                 n = n + registers[list1[index+1]] + registers[list1[index+2]]
                 return n
@@ -516,7 +477,7 @@ def TypeC(list1):
         index = list1.index('div')
         if index + 2 == len(list1) - 1:
             if list1[index+1] not in registers or list1[index+2] not in registers:
-                return 'False'
+                return '-1'
             else:
                 n = n + registers[list1[index+1]] + registers[list1[index+2]]
                 return n
@@ -529,7 +490,7 @@ def TypeC(list1):
         index = list1.index('cmp')
         if index + 2 == len(list1) - 1:
             if list1[index+1] not in registers or list1[index+2] not in registers:
-                return 'False'
+                return '-1'
             else:
                 n = n + registers[list1[index+1]] + registers[list1[index+2]]
                 return n
@@ -542,7 +503,7 @@ def TypeC(list1):
         index = list1.index('not')
         if index + 2 == len(list1) - 1:
             if list1[index+1] not in registers or list1[index+2] not in registers:
-                return 'False'
+                return '-1'
             else:
                 n = n + registers[list1[index+1]] + registers[list1[index+2]]
                 return n
@@ -594,12 +555,12 @@ while(True):
         if "var" not in List and len(List) > 0:
             valid_instruction+=1
 
-
-
         if len(line)==0:
             empty = empty + 1
     except EOFError:
         break
+    # if line=='-1':
+        # break
 total_instructions = len(instructions) #starting from 0 to key - 1
 startaddress = total_instructions - len(var) - empty
 key = key - 1
@@ -622,83 +583,124 @@ else:
             else:
                 temp = TypeF(list1)
                 if temp == "-1":
-                    print("typo at line", k)
+                    print("typo at line", k+1)
                     error=False
                     break
                 else:
                     machinecode.append(temp)
                     # print(temp)
         elif instructions[k].count(':')>1:
-            print('Invalid label instruction in line : ',k+1)
+            print('error: Invalid label instruction in line : ',k+1)
             error=False
             break
         elif 'var' in list1:
             if k!=0 and 'var' not in instructions[k-1]:
-                print('Invalid declaration in line : ',k+1)
+                print('error: variable declared in between the program at line: ',k+1)
                 error=False
                 break
             else:
                 isvalid = var_type(list1,startaddress)
                 if isvalid=='False':
-                    print('Error in line:',k+1)
+                    print('Invalid var instruction at line:',k+1)
                     error=False
                     break
                 else:
                     startaddress = startaddress + int(1)
-
         elif 'add' in list1 or 'sub' in list1 or 'mul' in list1 or 'xor' in list1 or 'or' in list1 or 'and' in list1:
-            temp = TypeA(list1, k+1)
+            if("FLAGS" in list1):
+                print("Illegal use of Flag resistor at line:",k+1)
+                error = False
+                break
+            temp = TypeA(list1)
             if temp=='-1':
                 print('Semantics Error in line:',k+1)
                 error=False
+                break
+            elif temp == '-2':
+                print('Typo Error in Register Value at line:',k+1)
+                error = False
                 break
             else:
                 machinecode.append(temp)
                 # print(temp)
         elif 'ld' in list1 or 'st' in list1:
             temp = TypeD(list1)
-            if temp=='False':
-                print('Semantics Error in line:',k+1)
+            if temp=='-1':
+                print('error: Typo in register name at line:',k+1)
                 error=False
+                break
+            elif temp=='-2':
+                print('error: Variable not found at line: ', k+1)
+                error = False
+                break
+            elif temp=='False':
+                print('error: Invalid syntax of instruction at line: ',k+1)
+                error = False
                 break
             else:
                 machinecode.append(temp)
                 # print(temp)
         elif 'mov' in list1:
             idx = list1.index('mov')
-            if '$' in list1[idx+2]:
+            if idx+2 < len(list1) and '$' in list1[idx+2]:
                 isvalid = TypeB(list1)
-                if isvalid != '-1':
-                    machinecode.append(isvalid)
-                    # print(isvalid)
-                else:
-                    print('Error at line number ',k+1)
-                    error=False
+
+                if (isvalid == '-1'):
+                    print("Syntax Error at line:", k + 1)
+                    error = False
                     break
+                elif (isvalid == '-2'):
+                    print("Illegal use of immediate value at line:", k + 1)
+                    error = False
+                    break
+                elif (isvalid == '-3'):
+                    print("Semantics error at line:", k + 1)
+                    error = False
+                    break
+                else:
+                    machinecode.append(isvalid)
             else:
                 isvalid = TypeC(list1)
-                if isvalid!='False':
-                    machinecode.append(isvalid)
-                    # print(isvalid)
-                else:
-                    print('Error in line: ',k+1)
+                if isvalid=='-1':
+                    print('error: Typo in register name at line: ',k+1)
                     error=False
                     break
+                elif isvalid=='False':
+                    print('error: Syntax error in instruction at line: ',k+1)
+                    error=False
+                    break
+                else:
+                    machinecode.append(isvalid)
             
         elif 'rs' in list1 or 'ls' in list1:
             isvalid = TypeB(list1)
-            if isvalid!='-1':
+            if(isvalid == '-1'):
+                print("Syntax Error at line:" ,k+1)
+                error = False
+                break
+            elif(isvalid == '-2'):
+                print("Illegal use of immediate value at line:",k+1)
+                error = False
+                break
+            elif(isvalid == '-3'):
+                print("Semantics error at line:",k+1)
+                error = False
+                break
+            else:
                 machinecode.append(isvalid)
-                # print(isvalid)
+
         elif 'div' in list1 or 'not' in list1 or 'cmp' in list1:
             isvalid = TypeC(list1)
-            if isvalid!='False':
-                machinecode.append(isvalid)
-                # print(isvalid)
-            else:
-                print('Error in line : ',k+1)
+            if isvalid=='-1':
+                print('error: Typo in register name at line: ',k+1)
                 error=False
                 break
+            elif isvalid=='False':
+                print('error: Syntax error in instruction at line: ',k+1)
+                error=False
+                break
+            else:
+                machinecode.append(isvalid)
         
         elif 'jmp' in list1 or 'jlt' in list1 or 'jgt' in list1 or 'je' in list1:   
             temp = TypeE(list1, Label_Dict, k+1)
@@ -713,6 +715,6 @@ else:
             print('Invalid instruction in line : ',k+1)
             error=False
             break
-if error==True:
+if (error):
     for j in machinecode:
         print(j)
