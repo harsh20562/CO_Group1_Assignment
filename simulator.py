@@ -37,6 +37,8 @@ while(True):
            Mem_add[decimalToBinary(s)[8:]] = line
            arr.append(line)
            s = s+1
+       #if line=='':
+           #break
        ...
     except EOFError:
         break
@@ -44,7 +46,7 @@ i = 0
 key = 0
 cycle = {}
 extra = {}
-while(i<len(arr)):
+while(i<len(arr)): #i = PC
     cycle[key] = i
     if(arr[i][0:5] == '00000'):     #add
         str1 = Register_Value[arr[i][10:13]]
@@ -236,6 +238,7 @@ while(i<len(arr)):
               Register_Value['011'] + " " + Register_Value['100'] + " " + Register_Value['101'] + " " + Register_Value[
                   '110'] + " " + Register_Value['111'])
         extra[key] = n
+        key = key + 1
         continue
     elif(arr[i][0:5] == '10000' and binaryToDecimal(Register_Value['111'])==4):   #lessthanjmp
         n = binaryToDecimal(arr[i][8:])
@@ -246,6 +249,7 @@ while(i<len(arr)):
               Register_Value['011'] + " " + Register_Value['100'] + " " + Register_Value['101'] + " " + Register_Value[
                   '110'] + " " + Register_Value['111'])
         extra[key] = n
+        key = key + 1
         continue
     elif (arr[i][0:5] == '10001' and binaryToDecimal(Register_Value['111']) == 2):  #greaterthanjmp
         n = binaryToDecimal(arr[i][8:])
@@ -256,17 +260,18 @@ while(i<len(arr)):
               Register_Value['011'] + " " + Register_Value['100'] + " " + Register_Value['101'] + " " + Register_Value[
                   '110'] + " " + Register_Value['111'])
         extra[key] = n
+        key = key + 1
         continue
     elif (arr[i][0:5] == '10010' and binaryToDecimal(Register_Value['111']) == 1):    #equaljmp
         n = binaryToDecimal(arr[i][8:])
         str3 = decimalToBinary(i)
         i = n
-        print(i)
         Register_Value['111'] = '0' * 16
         print(str3[8:] + " " + Register_Value['000'] + " " + Register_Value['001'] + " " + Register_Value['010'] + " " +
               Register_Value['011'] + " " + Register_Value['100'] + " " + Register_Value['101'] + " " + Register_Value[
                   '110'] + " " + Register_Value['111'])
         extra[key] = n
+        key = key + 1
         continue
     else:
         str3 = decimalToBinary(i)
@@ -282,6 +287,7 @@ for i in range(s,256):
     print('0'*16)
 #colors = list("rgbcmyk")
 #print(cycle)
+#print(extra)
 for j in cycle.keys():
     x = j
     y = cycle[j]
