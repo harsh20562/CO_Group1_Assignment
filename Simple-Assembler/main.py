@@ -708,7 +708,7 @@ else:
                 machinecode.append(temp)
                 # print(temp)
             else:
-                print('Error at line:',k+1)
+                #print('Error at line:',k+1)
                 error=False
                 break
         else:
